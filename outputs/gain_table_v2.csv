@@ -1,0 +1,6 @@
+capacity_pct,baseline_capture,v1_bucket_x_exposure,v2_dpdband_x_exposure,v3_band_then_exposure,random_capture
+0.05,0.457,0.39,0.437,0.453,0.05
+0.1,0.597,0.488,0.522,0.59,0.1
+0.2,0.686,0.577,0.632,0.685,0.2
+0.3,0.807,0.627,0.689,0.797,0.3
+0.5,0.89,0.724,0.793,0.886,0.5
