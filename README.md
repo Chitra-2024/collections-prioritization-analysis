@@ -32,15 +32,17 @@ Kaggle *Home Credit Default Risk* (not included in this repo). Files used: `POS_
 Oldest-first matched or beat every variant. At 10% capacity it captures about 6x what random picking would. Loan amount did not improve the ranking.
 
 ## Decision log
-- Sampling: 30,000 customers, seed 42, for speed.
-- Duplicate loan-month rows removed: <number from notebook 01>.
-- Loans with missing or non-positive amounts removed: <number from notebook 01>.
+- Sampling: 30,000 customers, seed 42, for speed. The sample has 897,388 loan-month rows; the final analysis table has 14,580 overdue loan-months (1-90 days past due).
+- Quality checks on the monthly loan table: 0 missing values, 0 duplicate loan-month rows, 0 negative days past due.
+- Loan records with a missing or non-positive amount removed from the amount table: 29,583 (0 missing, 29,583 with an amount of zero or less).
+- As a result, 30,299 of 897,388 loan-month rows (3.4%) have no usable loan amount (82% belong to active loans) and are excluded from the overdue analysis. This removes 920 of 15,500 candidate overdue loan-months (5.9%), leaving 14,580. The roll-rate matrix does not use loan amounts, so it is unaffected.
 - Only consecutive months used for transitions, so gaps in history do not create false transitions.
 - Variants v2 and v3 were designed after seeing v1's result and evaluated on the same test split.
 
 ## Limitations
 - No contact log, so the analysis shows targeting quality, not that contact improves outcomes.
 - Original loan amount is a proxy for exposure (outstanding balance is not available).
+- Loans without a usable amount are excluded from the overdue analysis. They were overdue more often (3.0% of their loan-months vs 1.7% for retained loans), so the retained data may understate overdue exposure. The effect on the policy comparison was not tested.
 - Public data, not any lender's own. One train/test split and about 1,300 roll-forward events, so small gaps between policies are not reliable.
 - Months are pooled for simplicity.
 
@@ -54,3 +56,4 @@ Oldest-first matched or beat every variant. At 10% capacity it captures about 6x
 - [ ] Power BI dashboard
 - [ ] Confidence intervals via bootstrap
 - [ ] Design of a controlled test for a new policy
+- [ ] Investigate loans with no usable amount and test a fallback exposure measure (for example, the applied amount)
