@@ -1,7 +1,5 @@
 # Collections Prioritization Analysis
 
-**Status: in progress.** The SQL pipeline, roll-rate analysis and backtest are complete. The Excel summary and Power BI dashboard are being built.
-
 ## Problem
 A lender has more overdue accounts than collection agents can contact. This project asks: if only a fraction of overdue accounts can be contacted, which should come first? It compares simple prioritization rules on historical data.
 
